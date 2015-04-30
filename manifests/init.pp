@@ -909,6 +909,11 @@ class gitlab (
 
   ) inherits gitlab::params {
 
+  $package = $gitlab_release ? {
+    'basic'      => 'gitlab-ce',
+    'enterprise' => 'gitlab-ee',
+  }
+
   # Verify required parameters are provided. 
   if !$external_url {
     fail ("\$external_url parameter required. \

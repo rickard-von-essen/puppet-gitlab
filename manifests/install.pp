@@ -186,8 +186,9 @@ class gitlab::install inherits ::gitlab {
     creates => "${download_location}/${omnibus_filename}",
     timeout => 1800,
   }
+
   # Install gitlab with the appropriate package manager (rpm or dpkg)
-  package { 'gitlab':
+  package { $::gitlab::package:
     ensure   => latest,
     source   => "${download_location}/${omnibus_filename}",
     provider => $package_manager,
